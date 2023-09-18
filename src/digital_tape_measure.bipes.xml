@@ -1,0 +1,127 @@
+<xml xmlns="https://bipes.net.br">
+  <workspace>
+    <field name="DEVICE">RPI_Pico_W</field>
+    <field name="TIMESTAMP">1694870783504</field>
+    <freeboard><![CDATA[{"version":1,"allow_edit":true,"plugins":[],"panes":[],"datasources":[],"columns":3}]]></freeboard>
+    <databoard><![CDATA[{"currentWorkspace":"kvflqzky5js84d7x5pe","workspace:kvflqzky5js84d7x5pe":[]}]]></databoard> 
+  </workspace>
+  <variables>
+    <variable id="!%ohwdJmCoYoM#fUe]Jf">distance</variable>
+  </variables>
+  <block type="project_metadata" id="QYYOu+Nh_nja^uFYR!6P" x="-2212" y="-1188">
+    <value name="project_author">
+      <shadow type="text" id="V0;OElIH(9K1!X}3eXMW">
+        <field name="TEXT">Chris</field>
+      </shadow>
+    </value>
+    <value name="project_iot_id">
+      <shadow type="math_number" id="p|;+^_bb{0wS)Qtv|}ia">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+    <value name="project_description">
+      <shadow type="text" id="OFw.5{)TdlnS=)/{Zgk~">
+        <field name="TEXT">digital_tape_measure</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="hcsr_init" id="i?|Jv-P#*Y!FsjYpo)ah" x="-2212" y="-1038">
+    <field name="DHT_PIN_MSG">timeout (us)</field>
+    <field name="DHT_PIN_MSG">trigger pin</field>
+    <field name="DHT_PIN_MSG">timeout (us)</field>
+    <value name="echo">
+      <shadow type="pinout" id="#VO,*BLw4r?;qOVYoum`">
+        <field name="DEVICE">RPI_Pico_W</field>
+        <field name="PIN">17</field>
+      </shadow>
+    </value>
+    <value name="trigger">
+      <shadow type="pinout" id="OA*bn$}e,Azh.ZT|)lA%">
+        <field name="DEVICE">RPI_Pico_W</field>
+        <field name="PIN">16</field>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="FL$lagmqE+`LZF.xTk]T">
+        <field name="NUM">10000</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="init_oled" id="-+3oGw:jY1qsnb,d.C9h" x="-2213" y="-838">
+    <value name="i2c">
+      <shadow type="math_number" id="D[(tz(Xd!7lqhUr2ARMf">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+    <value name="scl">
+      <shadow type="pinout" id="xYkHVcIGrKYKN35Zy{]Y">
+        <field name="DEVICE">RPI_Pico_W</field>
+        <field name="PIN">9</field>
+      </shadow>
+    </value>
+    <value name="sda">
+      <shadow type="pinout" id="Dq9eD*8bsuO`/),{SXBY">
+        <field name="DEVICE">RPI_Pico_W</field>
+        <field name="PIN">8</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="controls_repeat_ext" id="b5~/MpR0BOVkz8.THL:F" x="-2213" y="-612">
+    <value name="TIMES">
+      <shadow type="math_number" id="(rSJ@rzMJaO)I0XJM/E:">
+        <field name="NUM">250</field>
+      </shadow>
+    </value>
+    <statement name="DO">
+      <block type="variables_set" id="!KJXzy[YU)-k=(J7=HO3">
+        <field name="VAR" id="!%ohwdJmCoYoM#fUe]Jf">distance</field>
+        <value name="VALUE">
+          <block type="hcsr_read" id="O7:A?Bgt0TUAIaKL,SkA">
+            <field name="MSG_READ_DHT_TEMP">Get distance (Ultrasound sensor)</field>
+          </block>
+        </value>
+        <next>
+          <block type="clear_oled" id="=uEoNR=LF4Z)y9?9U`Pk">
+            <next>
+              <block type="write_oled" id="vDG.vy;jD_66rzhku|,v">
+                <value name="x">
+                  <shadow type="math_number" id="bcOIp).{!!/c9RB/5oFv">
+                    <field name="NUM">50</field>
+                  </shadow>
+                </value>
+                <value name="y">
+                  <shadow type="math_number" id="7d?A25@{hwK#ui)A[!Ab">
+                    <field name="NUM">50</field>
+                  </shadow>
+                </value>
+                <value name="text">
+                  <shadow type="text" id="TACRA,O?{mQD3tiHV;gN">
+                    <field name="TEXT">Hello</field>
+                  </shadow>
+                  <block type="text_to_str" id="4|!(sz#o^xu9kX2gl8k?">
+                    <field name="VAR">to str</field>
+                    <value name="var">
+                      <block type="variables_get" id="^%SO}o0UBQ`,aqmaZ=/U">
+                        <field name="VAR" id="!%ohwdJmCoYoM#fUe]Jf">distance</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay" id="x+V(v[O,Eo9{5zKip[(b">
+                    <field name="SCALE">sleep</field>
+                    <value name="TIME">
+                      <shadow type="math_number" id="]Rm5CPpGc8Nzk*k:1A@r">
+                        <field name="NUM">0.2</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
